@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CENTEcoin | Diseñá mejoras para Centenario</title>
+  <link rel="stylesheet" href="mapa_base/css/leaflet.css">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div>
+      <p class="etiqueta">Prototipo participativo</p>
+      <h1>CENTEcoin</h1>
+      <p>Analizá la información disponible y distribuí un presupuesto virtual en mejoras para la movilidad de Centenario.</p>
+    </div>
+    <a class="volver" href="../index.html">← Volver a los mapas</a>
+  </header>
+
+  <main>
+    <section class="introduccion">
+      <h2>¿Cómo se juega?</h2>
+      <ol>
+        <li>Revisá los siniestros, semáforos y paradas existentes.</li>
+        <li>Elegí una mejora y marcala en el mapa.</li>
+        <li>Usá hasta <strong>300 CENTEcoins</strong>.</li>
+        <li>Completá el formulario y descargá tu propuesta.</li>
+      </ol>
+      <p class="aviso"><strong>Versión de prueba:</strong> todavía no envía información a una base central. La propuesta se guarda en tu navegador y puede descargarse como archivo.</p>
+    </section>
+
+    <section class="zona-juego">
+      <aside class="panel">
+        <div class="presupuesto">
+          <span>Presupuesto disponible</span>
+          <strong><span id="saldo">300</span> CENTEcoins</strong>
+          <div class="barra"><div id="barra-gasto"></div></div>
+          <small>Gastado: <span id="gastado">0</span> / 300</small>
+        </div>
+
+        <h2>Elegí una intervención</h2>
+        <div class="herramientas" id="herramientas">
+          <button data-tipo="semaforo" data-modo="punto">
+            <span>🚦</span>
+            <strong>Semáforo</strong>
+            <small>40 CENTEcoins</small>
+          </button>
+          <button data-tipo="cruce" data-modo="punto">
+            <span>🚸</span>
+            <strong>Cruce elevado</strong>
+            <small>20 CENTEcoins</small>
+          </button>
+          <button data-tipo="bicisenda" data-modo="linea">
+            <span>🚲</span>
+            <strong>Bicisenda</strong>
+            <small>40 cada 100 m</small>
+          </button>
+          <button data-tipo="parada_nueva" data-modo="punto">
+            <span>🚌</span>
+            <strong>Nueva parada</strong>
+            <small>25 CENTEcoins</small>
+          </button>
+          <button data-tipo="parada_mejora" data-modo="punto">
+            <span>🛠️</span>
+            <strong>Mejorar parada</strong>
+            <small>10 CENTEcoins</small>
+          </button>
+        </div>
+
+        <div class="instruccion" id="instruccion">Elegí una intervención para comenzar.</div>
+
+        <div class="acciones-linea" id="acciones-linea" hidden>
+          <button id="finalizar-linea">Finalizar bicisenda</button>
+          <button id="cancelar-linea" class="secundario">Cancelar trazado</button>
+          <small id="estimacion-linea">Longitud: 0 m · Costo estimado: 0</small>
+        </div>
+
+        <div class="acciones-generales">
+          <button id="deshacer" class="secundario">Deshacer última</button>
+          <button id="reiniciar" class="peligro">Borrar todas</button>
+        </div>
+
+        <h2>Tu propuesta</h2>
+        <div id="lista-propuestas" class="lista-vacia">Todavía no agregaste intervenciones.</div>
+      </aside>
+
+      <div class="mapa-contenedor">
+        <div id="mapa" aria-label="Mapa interactivo de Centenario"></div>
+        <div class="leyenda-simple">
+          <span><i class="punto siniestro"></i>Siniestros</span>
+          <span><i class="icono">🚦</i>Semáforos existentes</span>
+          <span><i class="icono">🚌</i>Paradas existentes</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="formulario-seccion">
+      <div>
+        <p class="etiqueta">Datos para el análisis</p>
+        <h2>Contanos desde qué experiencia te movés por la ciudad</h2>
+        <p>No solicitamos dirección exacta, nombre, DNI ni correo electrónico.</p>
+      </div>
+
+      <form id="form-participacion">
+        <label class="campo-completo">
+          Esquina más próxima a tu domicilio
+          <input id="esquina" name="esquina" type="text" required placeholder="Ejemplo: Cuba y Formosa">
+          <small>No indiques tu número de vivienda.</small>
+        </label>
+
+        <label>
+          Edad
+          <input id="edad" name="edad" type="number" min="1" max="110" required>
+        </label>
+
+        <label>
+          Sexo / identidad de género
+          <select id="sexo" name="sexo" required>
+            <option value="">Seleccionar</option>
+            <option>Mujer</option>
+            <option>Varón</option>
+            <option>No binario / otra identidad</option>
+            <option>Prefiero no responder</option>
+          </select>
+        </label>
+
+        <label>
+          Medio de movilidad más frecuente
+          <select id="movilidad" name="movilidad" required>
+            <option value="">Seleccionar</option>
+            <option>A pie</option>
+            <option>Bicicleta</option>
+            <option>Motocicleta</option>
+            <option>Automóvil</option>
+            <option>Colectivo</option>
+            <option>Taxi o remís</option>
+            <option>Otro</option>
+          </select>
+        </label>
+
+        <fieldset class="campo-completo">
+          <legend>Motivos de desplazamiento más frecuentes o relevantes</legend>
+          <div class="casillas">
+            <label><input type="checkbox" name="motivo" value="Trabajo"> Trabajo</label>
+            <label><input type="checkbox" name="motivo" value="Estudio"> Estudio</label>
+            <label><input type="checkbox" name="motivo" value="Acompañamiento o cuidados"> Acompañamiento o cuidados</label>
+            <label><input type="checkbox" name="motivo" value="Salud"> Salud</label>
+            <label><input type="checkbox" name="motivo" value="Compras o trámites"> Compras o trámites</label>
+            <label><input type="checkbox" name="motivo" value="Recreación o visitas"> Recreación o visitas</label>
+            <label><input type="checkbox" name="motivo" value="Otro"> Otro</label>
+          </div>
+        </fieldset>
+
+        <label class="campo-completo">
+          ¿Por qué elegiste estas mejoras?
+          <textarea id="justificacion" name="justificacion" rows="4" placeholder="Podés explicar qué problemas buscaste resolver o qué lugares priorizaste."></textarea>
+        </label>
+
+        <label class="consentimiento campo-completo">
+          <input id="consentimiento" type="checkbox" required>
+          Comprendo que esta es una prueba y acepto que mi propuesta se use con fines de investigación y planificación, sin identificarme personalmente.
+        </label>
+
+        <div class="botones-descarga campo-completo">
+          <button type="submit">Guardar y preparar propuesta</button>
+          <button type="button" id="descargar-json" class="secundario" disabled>Descargar propuesta</button>
+          <button type="button" id="descargar-geojson" class="secundario" disabled>Descargar capa para QGIS</button>
+        </div>
+      </form>
+
+      <div id="resultado" class="resultado" hidden></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Prototipo experimental del proyecto Mapas Centenario · Germán Gabriel Pérez · CONICET / Universidad Nacional del Comahue.</p>
+  </footer>
+
+  <script src="mapa_base/js/leaflet.js"></script>
+  <script src="mapa_base/data/Siniestrosmayo2025aabril2026_6.js"></script>
+  <script src="mapa_base/data/semaforos_cente_2.js"></script>
+  <script src="mapa_base/data/paradas_bondi_3.js"></script>
+  <script src="juego.js"></script>
+</body>
+</html>
