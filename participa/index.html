@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CENTEcoin | Diseñá mejoras para Centenario</title>
   <link rel="stylesheet" href="mapa_base/css/leaflet.css">
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="estilos-v2.css">
 </head>
 <body>
 <header class="encabezado">
@@ -15,18 +15,18 @@
 <main>
   <section class="introduccion">
     <h2>¿Cómo se juega?</h2>
-    <ol><li>Revisá los siniestros, semáforos y paradas existentes.</li><li>Elegí una mejora y marcala en el mapa.</li><li>Usá hasta <strong>300 CENTEcoins</strong>.</li><li>Completá el formulario y descargá tu propuesta.</li></ol>
+    <ol><li>Revisá los siniestros, semáforos y paradas existentes.</li><li>Elegí una mejora y marcala en el mapa.</li><li>Usá hasta <strong>400 CENTEcoins</strong>.</li><li>Completá el formulario y descargá tu propuesta.</li></ol>
     <p class="aviso"><strong>Versión de prueba:</strong> todavía no envía información a una base central.</p>
   </section>
 
   <section class="zona-juego">
     <aside class="panel">
-      <div class="presupuesto"><span>Presupuesto disponible</span><strong><span id="saldo">300</span> CENTEcoins</strong><div class="barra"><div id="barra-gasto"></div></div><small>Gastado: <span id="gastado">0</span> / 300</small></div>
+      <div class="presupuesto"><span>Presupuesto disponible</span><strong><span id="saldo">400</span> CENTEcoins</strong><div class="barra"><div id="barra-gasto"></div></div><small>Gastado: <span id="gastado">0</span> / 400</small></div>
       <h2>Elegí una intervención</h2>
       <div class="herramientas" id="herramientas">
         <button data-tipo="semaforo" data-modo="punto"><span>🚦</span><strong>Semáforo</strong><small>40 CENTEcoins</small></button>
         <button data-tipo="cruce" data-modo="punto"><span>🚸</span><strong>Cruce elevado</strong><small>20 CENTEcoins</small></button>
-        <button data-tipo="bicisenda" data-modo="linea"><span>🚲</span><strong>Bicisenda</strong><small>40 cada 100 m</small></button>
+        <button data-tipo="bicisenda" data-modo="linea"><span class="icono-bicisenda-boton"><span>🚲</span><i></i></span><strong>Bicisenda</strong><small>40 cada 100 m</small></button>
         <button data-tipo="parada_nueva" data-modo="punto"><span>🚌</span><strong>Nueva parada</strong><small>25 CENTEcoins</small></button>
         <button data-tipo="parada_mejora" data-modo="punto"><span>🛠️</span><strong>Mejorar parada</strong><small>10 CENTEcoins</small></button>
       </div>
@@ -35,7 +35,7 @@
       <div class="acciones-generales"><button id="deshacer" class="secundario">Deshacer última</button><button id="reiniciar" class="peligro">Borrar todas</button></div>
       <h2>Tu propuesta</h2><div id="lista-propuestas" class="lista-vacia">Todavía no agregaste intervenciones.</div>
     </aside>
-    <div class="mapa-contenedor"><div id="mapa"></div><div class="leyenda-simple"><span><i class="punto siniestro"></i>Siniestros</span><span>🚦 Semáforos existentes</span><span>🚌 Paradas existentes</span></div></div>
+    <div class="mapa-contenedor"><div id="mapa"><div id="puntero-herramienta" hidden></div></div><div class="leyenda-simple"><span><i class="punto siniestro"></i>Siniestros</span><span>🚦 Semáforos existentes</span><span>🚌 Paradas existentes</span></div></div>
   </section>
 
   <section class="formulario-seccion">
@@ -58,6 +58,6 @@
 <script src="mapa_base/data/Siniestrosmayo2025aabril2026_6.js"></script>
 <script src="mapa_base/data/semaforos_cente_2.js"></script>
 <script src="mapa_base/data/paradas_bondi_3.js"></script>
-<script src="juego-v2.js"></script>
+<script src="juego-v3.js"></script>
 </body>
 </html>

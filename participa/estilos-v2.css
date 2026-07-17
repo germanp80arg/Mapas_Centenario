@@ -1,0 +1,12 @@
+@import url("estilos.css");
+:root{--azul-bicisenda:#1976d2;}
+.icono-bicisenda-boton{display:flex!important;align-items:center;gap:8px;min-height:32px;}
+.icono-bicisenda-boton>span{display:inline!important;font-size:1.55rem;}
+.icono-bicisenda-boton i{display:inline-block;width:54px;height:8px;border-radius:999px;background:var(--azul-bicisenda);box-shadow:0 0 0 2px rgba(25,118,210,.18);}
+#mapa{position:relative;}
+#mapa.modo-colocacion,.modo-colocacion .leaflet-interactive{cursor:none!important;}
+#puntero-herramienta{position:absolute;z-index:1000;pointer-events:none;transform:translate(10px,-50%);font-size:29px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));}
+.puntero-bici{display:flex;align-items:center;gap:4px;}
+.puntero-bici i{display:inline-block;width:34px;height:7px;border-radius:999px;background:var(--azul-bicisenda);box-shadow:0 0 0 2px rgba(255,255,255,.9);}
+.propuesta-listada{display:grid;grid-template-columns:25px 1fr 32px;gap:7px;align-items:center;padding:8px 0;border-bottom:1px solid #ddd;}
+.herramientas button.activa{border:2px solid var(--principal);background:#eaf7f3;}
