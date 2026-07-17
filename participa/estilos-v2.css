@@ -1,0 +1,23 @@
+@import url("estilos.css");
+
+:root {
+  --azul-bicisenda: #1976d2;
+}
+
+/* Vista previa de la bicisenda dentro del botón */
+.icono-bicisenda-boton {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+}
+
+.icono-bicisenda-boton > span {
+  display: inline !important;
+  font-size: 1.55rem;
+}
+
+.icono-bicisenda-boton i {
+  display: inline-block;
+  width: 54px;
+  height: 8
